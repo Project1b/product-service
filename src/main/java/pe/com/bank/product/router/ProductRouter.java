@@ -18,7 +18,8 @@ public class ProductRouter {
 //test
         return route()
                 .nest(path("/v1/reviews"), builder -> {
-                    builder .GET("",request -> productService.getProducts(request));
+                    builder .GET("",request -> productService.getProducts(request))
+                    .GET("/{id}", request -> productService.getProducts(request));
                 })
                 .GET("/v1/helloworld",(request -> ServerResponse.ok().bodyValue("helloworld")))
                 .build();

@@ -24,18 +24,16 @@ public class ProductService {
     ProductRepository productRepository;
 
     public Mono<ServerResponse> getProducts(ServerRequest request) {
-        var creditId = request.queryParam("creditId");
-        if (creditId.isPresent()) {
-            var creditsFlux = productRepository.findProductEntitiesByCreditId(String.valueOf(creditId.get()));
-            return buildProductEntitysResponse(creditsFlux);
-        } else {
-            var creditsFlux = productRepository.findAll();
-            return buildProductEntitysResponse(creditsFlux);
-        }
+        /*        var creditId = request.queryParam("creditId");*/
+        var reviewId = request.pathVariable("id");
+
+        var existingReview = productRepository.findById(reviewId);
+        return buildProductEntitysResponse(existingReview);
+
 
     }
 
-    private Mono<ServerResponse> buildProductEntitysResponse(Flux<ProductEntity> reviewsFlux) {
+    private Mono<ServerResponse> buildProductEntitysResponse(Mono<ProductEntity> reviewsFlux) {
         return ServerResponse.ok().body(reviewsFlux, ProductEntity.class);
     }
 
