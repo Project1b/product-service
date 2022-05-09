@@ -12,12 +12,11 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "product")
 public class ProductEntity {
 
-
-
     @Id
     private String productId;
     private String type;
-    private String creditId;
-
+    private String productName;
+    private String commission;
+    private String transactionLimit;
 
 }

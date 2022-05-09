@@ -6,5 +6,5 @@ import reactor.core.publisher.Flux;
 
 public interface ProductRepository extends ReactiveMongoRepository<ProductEntity, String> {
 
-    Flux<ProductEntity> findProductEntitiesByCreditId(String creditId);
+
 }

@@ -9,19 +9,21 @@ import pe.com.bank.product.service.ProductService;
 import static org.springframework.web.reactive.function.server.RequestPredicates.path;
 import static org.springframework.web.reactive.function.server.RouterFunctions.route;
 
-
 @Configuration
 public class ProductRouter {
 
     @Bean
     public RouterFunction<ServerResponse> productsRoute(ProductService productService){
-//test
+
         return route()
-                .nest(path("/v1/reviews"), builder -> {
+                .nest(path("/v1/products"), builder -> {
                     builder .GET("",request -> productService.getProducts(request))
+                            .POST("",request -> productService.addProduct(request))
+                            .PUT("/{id}", request -> productService.updateProduct(request))
+                            .DELETE("/{id}", request -> productService.deleteProduct(request))
                     .GET("/{id}", request -> productService.getProducts(request));
                 })
-                .GET("/v1/helloworld",(request -> ServerResponse.ok().bodyValue("helloworld")))
+                .GET("/v1/hello",(request -> ServerResponse.ok().bodyValue("hello")))
                 .build();
 
 
