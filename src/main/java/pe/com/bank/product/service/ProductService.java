@@ -25,9 +25,21 @@ public class ProductService {
         var existingReview = productRepository.findById(productId);
         return buildProductEntitysResponse(existingReview);
     }
+
     private Mono<ServerResponse> buildProductEntitysResponse(Mono<ProductEntity> reviewsFlux) {
         return ServerResponse.ok().body(reviewsFlux, ProductEntity.class);
     }
+
+    public Mono<ServerResponse> getAllProducts(ServerRequest request) {
+        var existingReview2 = productRepository.findAll();
+        return buildProductEntitysResponse(existingReview2);
+    }
+
+    private Mono<ServerResponse> buildProductEntitysResponse(Flux<ProductEntity> reviewsFlux) {
+        return ServerResponse.ok().body(reviewsFlux, ProductEntity.class);
+    }
+
+
 
     public Mono<ServerResponse> addProduct(ServerRequest request) {
         return request.bodyToMono(ProductEntity.class)

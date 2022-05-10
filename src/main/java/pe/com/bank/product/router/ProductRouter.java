@@ -17,7 +17,8 @@ public class ProductRouter {
 
         return route()
                 .nest(path("/v1/products"), builder -> {
-                    builder .GET("",request -> productService.getProducts(request))
+                    builder .GET("/{id}",request -> productService.getProducts(request))
+                            .GET("",request ->productService.getAllProducts(request))
                             .POST("",request -> productService.addProduct(request))
                             .PUT("/{id}", request -> productService.updateProduct(request))
                             .DELETE("/{id}", request -> productService.deleteProduct(request))
