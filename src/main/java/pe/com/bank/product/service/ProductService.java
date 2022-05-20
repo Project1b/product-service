@@ -55,7 +55,7 @@ public class ProductService {
                         .map(reqReview -> {
                             product.setType(reqReview.getType());
                             product.setProductName(reqReview.getProductName());
-                            product.setCommission(reqReview.getCommission());
+                            product.setCommissionMaintenance(reqReview.getCommissionMaintenance());
                             product.setTransactionLimit(reqReview.getTransactionLimit());
                             return product;
                         })

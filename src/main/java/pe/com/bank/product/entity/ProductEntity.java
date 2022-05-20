@@ -16,7 +16,7 @@ public class ProductEntity {
     private String productId;
     private String type;
     private String productName;
-    private String commission;
+    private Double commissionMaintenance;
     private String transactionLimit;
 
 }
