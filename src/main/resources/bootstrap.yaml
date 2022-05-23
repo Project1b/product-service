@@ -10,14 +10,5 @@ spring:
     mongodb:
       uri: mongodb+srv://leonel:leonel@cluster0.we5wo.mongodb.net/bank
 
-eureka:
-  client:
-    service-url:
-      defaultZone:
-        http://localhost:8096/eureka
-  instance:
-<<<<<<< HEAD
-    preferIpAddress: true
-=======
-    preferIpAddress: true
->>>>>>> branch 'master' of https://github.com/Project1b/product-service.git
+
+
