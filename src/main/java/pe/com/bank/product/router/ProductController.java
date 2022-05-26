@@ -18,13 +18,13 @@ import reactor.core.publisher.Flux;
 @RequestMapping("/v2")
 public class ProductController {
 	
-	
+/*	
 	ProductService productService;
 	
-	@GetMapping ("/products/betweenDates/{startDate}/{endDate}")
+	@GetMapping ("/products/getGeneralReport/{startDate}/{endDate}")
 	public Flux<GeneralReportDTO> getTransactionsByLoanId(@PathVariable @DateTimeFormat(pattern = "dd-MM-yyyy")Date startDate,
 			@PathVariable @DateTimeFormat(pattern = "dd-MM-yyyy") Date endDate){
 		return productService.getGeneralReport(startDate,endDate);
 	}
-
+*/
 }

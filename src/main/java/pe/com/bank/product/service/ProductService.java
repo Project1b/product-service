@@ -1,5 +1,6 @@
 package pe.com.bank.product.service;
 
+import java.text.ParseException;
 import java.util.Date;
 
 import org.springframework.web.reactive.function.server.ServerRequest;
@@ -22,6 +23,6 @@ public interface ProductService {
 
 	 public Mono<ServerResponse> deleteProduct(ServerRequest request);
 	 
-	 public Flux<GeneralReportDTO> getGeneralReport(Date startDate,Date endDate);
+	 public Mono<ServerResponse> getGeneralReport(ServerRequest request);
 }
 		

@@ -9,10 +9,12 @@ import pe.com.bank.product.service.ProductService;
 import static org.springframework.web.reactive.function.server.RequestPredicates.path;
 import static org.springframework.web.reactive.function.server.RouterFunctions.route;
 
+import java.text.ParseException;
+
 @Configuration
 public class ProductRouter {
 
-	/*
+	
     @Bean
     public RouterFunction<ServerResponse> productsRoute(ProductService productService){
         return route()
@@ -25,5 +27,5 @@ public class ProductRouter {
                         .DELETE("/deleteProduct/{id}", productService::deleteProduct))
                 .build();
     }
-    */
+  
 }

@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.var;
 import lombok.extern.slf4j.Slf4j;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.springframework.http.HttpStatus;
@@ -87,8 +89,14 @@ public class ProductServiceImpl implements ProductService {
     }
     
     
-	public Flux<GeneralReportDTO> getGeneralReport(Date startDate,Date endDate){
-		return productRepository.findAll().flatMap( product -> {
+	public Mono<ServerResponse> getGeneralReport(ServerRequest request){
+				
+		var startDate =request.pathVariable("startDate");
+		var endDate = request.pathVariable("endDate");
+
+		
+
+		var generalReport = productRepository.findAll().flatMap( product -> {
 						
 			 var acountInfo = accountRestClient.getAccountByProductId(product.getProductId()).flatMap(account ->  {				
 				 var transactionsAccount = trasanctionRestClient.getTransactionsByDateAndAccountId(account.getId(),startDate,endDate).collectList();
@@ -107,7 +115,7 @@ public class ProductServiceImpl implements ProductService {
 			}).collectList();
 			
 			var loanInfo = loanRestClient.getLoanByProductId(product.getProductId()).flatMap( loan -> {
-				var transactionsLoan = trasanctionRestClient.getTransactionsByDateAndLoanId(loan.getLoanId(), startDate, endDate).collectList();
+				var transactionsLoan = trasanctionRestClient.getTransactionsByDateAndLoanId(loan.getLoanId(), startDate,endDate).collectList();
 							
 				return transactionsLoan.map( t -> new InfoGeneralLoan(loan.getLoanId(),loan.getDebt(),loan.getPaymentDate(),loan.getEndDate(),
 						loan.getQuota(),loan.getDebtStatus(),loan.getPendingQuota(),loan.getCustomerId(),t));
@@ -124,6 +132,17 @@ public class ProductServiceImpl implements ProductService {
 				
 			});
 		});
+		
+			return buildGeneralReportResponse(generalReport);
+		 
+		// return buildGeneralReportResponse(Flux.empty());
 	}
 
+	
+	private Mono<ServerResponse> buildGeneralReportResponse(Flux<GeneralReportDTO> generalReportFlux) {
+        return ServerResponse.ok().body(generalReportFlux, GeneralReportDTO.class);
+    }
+
+	
+	
 }

@@ -36,34 +36,34 @@ public class TrasanctionRestClient {
 	  }
 	  
 	  
-	  public Flux<TransactionEntity> getTransactionsByDateAndAccountId(String accoundId,Date starDate,Date endDate){
-		  var url = transactionUrl.concat("/v1/transactions/accountId/{accoundId}/betweenDates/01-05-2022/31-05-2022");
+	  public Flux<TransactionEntity> getTransactionsByDateAndAccountId(String accoundId,String starDate,String endDate){
+		  var url = transactionUrl.concat("/v1/transactions/accountId/{accoundId}/betweenDates/{starDate}/{endDate}");
 		  
 		  return  webClient
 	                .get()
-	                .uri(url,accoundId)
+	                .uri(url,accoundId,starDate,endDate)
 	                .retrieve()
 	                .bodyToFlux(TransactionEntity.class)
 	                .log();
 	  }
 	  
-	  public Flux<TransactionEntity> getTransactionsByDateAndCreditId(String creditId,Date starDate,Date endDate){
-		  var url = transactionUrl.concat("/v1/transactions/creditId/{creditId}/betweenDates/01-05-2022/31-05-2022");
+	  public Flux<TransactionEntity> getTransactionsByDateAndCreditId(String creditId,String starDate,String endDate){
+		  var url = transactionUrl.concat("/v1/transactions/creditId/{creditId}/betweenDates/{starDate}/{endDate}");
 		  
 		  return  webClient
 	                .get()
-	                .uri(url,creditId)
+	                .uri(url,creditId,starDate,endDate)
 	                .retrieve()
 	                .bodyToFlux(TransactionEntity.class)
 	                .log();
 	  }
 	  
-	  public Flux<TransactionEntity> getTransactionsByDateAndLoanId(String loanId,Date starDate,Date endDate){
-		  var url = transactionUrl.concat("/v1/transactions/loandId/{loandId}/betweenDates/01-05-2022/31-05-2022");
+	  public Flux<TransactionEntity> getTransactionsByDateAndLoanId(String loanId,String starDate,String endDate){
+		  var url = transactionUrl.concat("/v1/transactions/loandId/{loandId}/betweenDates/{starDate}/{endDate}");
 		  
 		  return  webClient
 	                .get()
-	                .uri(url,loanId)
+	                .uri(url,loanId,starDate,endDate)
 	                .retrieve()
 	                .bodyToFlux(TransactionEntity.class)
 	                .log();
